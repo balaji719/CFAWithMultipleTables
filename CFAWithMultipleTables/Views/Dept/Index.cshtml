@@ -1,0 +1,38 @@
+﻿@model CFAWithMultipleTables.Models.Dept
+
+@{
+    ViewBag.Title = "Index";
+}
+
+<h2>Index</h2>
+@using (Html.BeginForm("Index", "Dept", FormMethod.Post))
+{
+    @Html.Label("Enter Dno")
+    @Html.TextBoxFor(model => model.Dno)
+    <br />
+    @Html.Label("Enter Dname")
+    @Html.TextBoxFor(model => model.Dname)
+    <br />
+    <input type="submit" value="Save" name="b1" />
+    <input type="submit" value="Update" name="b1" />
+    @*<input type="submit" value="Delete" name="b1"  />
+        <input type="submit" value="Edit" name="b1" />*@
+    
+
+    <br />
+    <table>
+        <tr>
+            <td>Dno</td>
+            <td>Dname</td>
+        </tr>
+        @foreach (var item in TempData["Dept"] as IEnumerable<CFAWithMultipleTables.Models.Dept>)
+        {
+    <tr>
+        <td>@item.Dno</td>
+        <td>@item.Dname</td>
+        <td>@Html.ActionLink("Delete", "Delete", new { id = @item.Dno })</td>
+        <td>@Html.ActionLink("Edit", "Edit", new { id = @item.Dno })</td>
+    </tr>
+        }
+    </table>
+}

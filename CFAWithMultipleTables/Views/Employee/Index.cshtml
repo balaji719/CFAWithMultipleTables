@@ -1,0 +1,44 @@
+﻿@model CFAWithMultipleTables.Models.Employee
+
+@{
+    ViewBag.Title = "Index";
+}
+
+<h2>Index</h2>
+
+@using (Html.BeginForm("Index", "Employee", FormMethod.Post))
+{
+    @Html.Label("Enter Eno")
+    @Html.TextBoxFor(model => model.Eno)
+    <br />
+    @Html.Label("Enter Ename")
+    @Html.TextBoxFor(model => model.Ename)
+    <br />
+    @Html.Label("Enter Salary")
+    @Html.TextBoxFor(model => model.Salary)
+    <br />
+    @Html.Label("Select Dept")
+    @Html.DropDownList("Dept", TempData["dept"] as List<SelectListItem>)
+    <br />
+    <input type="submit" value="Save" />
+    <br />
+    <table>
+        <tr>
+            <td>Eno</td>
+            <td>Ename</td>
+            <td>Salary</td>
+            <td>Dname</td>
+        </tr>
+        @foreach (var item in TempData["e"] as IEnumerable<CFAWithMultipleTables.Models.Employee>)
+        {
+            <tr>
+                <td>@item.Eno</td>
+                <td>@item.Ename</td>
+                <td>@item.Salary</td>
+                <td>@item.D.Dname</td>
+            </tr>
+        }
+    </table>
+
+
+}
